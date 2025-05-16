@@ -4,8 +4,6 @@ import nodes
 import os
 import folder_paths
 
-
-
 def create_node_class_mappings():
     # This function creates a dictionary of node class mappings
     # The dictionary is sorted by module name and node class name
@@ -55,8 +53,8 @@ def init():
     print("----------------------------------------------------------------------------------------")
 
 
-init()
 
+init()
 NODE_CLASS_MAPPINGS = {}
 NODE_DISPLAY_NAME_MAPPINGS = {}
 WEB_DIRECTORY = "./web"
