@@ -7,8 +7,10 @@ import folder_paths
 
 def create_node_class_mappings():
     # This function creates a dictionary of node class mappings
-    # The dictionary is sorted by module name and node class name
-    # The function also excludes comfy_api_nodes and comfy_extras from the mapping
+    # The function excludes comfy_api_nodes and comfy_extras from the mapping
+    # The reason the dictionary is reversed is that the first node added 
+    # using app.ui.settings.addSetting in node-disabler-settings.js will be the last one in the list
+    # This feels dirty...
     reversed_dict = {key: nodes.NODE_CLASS_MAPPINGS[key] for key in reversed(nodes.NODE_CLASS_MAPPINGS)}
     all_nodes = {}
     counter = 0
@@ -28,8 +30,6 @@ def create_node_class_mappings():
 
         counter += 1
         
-
-    # Sort the values of each key in reverse alphabetical order
     for module in all_nodes:
         all_nodes[module] = sorted(all_nodes[module], reverse=True)
 
@@ -44,17 +44,17 @@ def save_node_class_mappings(all_nodes):
     return default_user_path
     
 def disable_nodes():
+    # This function disables nodes based on the settings in the comfy.settings.json file
     default_user_path = folder_paths.get_user_directory() + '\\default'
     with open(os.path.join(default_user_path, "comfy.settings.json"), 'r') as f:
         settings = json.load(f)
     
     for setting in settings:
         if setting.startswith("node-disabler"):
-            print(setting)
-            print(settings[setting])
+            # print(setting)
+            # print(settings[setting])
             if settings[setting] == False:
                 nodeName = setting.split(".")[2]
-                # print(f"Disabling {nodeName}")
                 nodes.NODE_CLASS_MAPPINGS.pop(nodeName)
                 print(f"Removed {nodeName} from NODE_CLASS_MAPPINGS")
     

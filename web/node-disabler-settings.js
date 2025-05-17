@@ -17,8 +17,8 @@ console.log("-------------------------- Node Disabler --------------------------
 // 	console.log(comfyjs)
 // }
 // console.log(comfysettingsjson)
-const testz = await app.extensionManager.setting;
-console.log(testz);
+// const testz = await app.extensionManager.setting;
+// console.log(testz);
 
 const response = await api.fetchApi('/userdata/node_class_mappings.json');
 
