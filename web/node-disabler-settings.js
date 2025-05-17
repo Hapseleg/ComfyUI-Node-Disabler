@@ -1,7 +1,7 @@
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
 console.log("-------------------------- Node Disabler --------------------------");
-app.extensionManager.setting.set('TestSetting', 'Hello, universe!')
+//app.extensionManager.setting.set('TestSetting', 'Hello, universe!')
 // try {
 // 	const test = await app.extensionManager.setting.set("example.boolean", true,);
 // 	console.log(test);
