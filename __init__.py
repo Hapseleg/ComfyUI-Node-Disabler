@@ -4,6 +4,7 @@ import nodes
 import os
 import folder_paths
 
+
 def create_node_class_mappings():
     # This function creates a dictionary of node class mappings
     # The dictionary is sorted by module name and node class name
@@ -42,7 +43,19 @@ def save_node_class_mappings(all_nodes):
         json.dump(all_nodes, f, default=str)
     return default_user_path
     
-
+def disable_nodes():
+    default_user_path = folder_paths.get_user_directory() + '\\default'
+    with open(os.path.join(default_user_path, "comfy.settings.json"), 'r') as f:
+        settings = json.load(f)
+    
+    for setting in settings:
+        if setting.startswith("node-disabler"):
+            if settings[setting] == "false":
+                nodeName = setting.split(".")[2]
+                nodes.NODE_CLASS_MAPPINGS.pop(nodeName)
+                print(f"Removed {nodeName} from NODE_CLASS_MAPPINGS")
+    
+    return ""
 
 def init():
     print("---------------------\033[33m Loading ComfyUI-Node-Disabler \033[0m---------------------")
@@ -50,6 +63,7 @@ def init():
     print(f"Found {counter} node classes in ComfyUI.")
     path = save_node_class_mappings(all_nodes)
     print(f"Node class mappings saved to {path}\\node_class_mappings.json")
+    disable_nodes()
     print("----------------------------------------------------------------------------------------")
 
 
