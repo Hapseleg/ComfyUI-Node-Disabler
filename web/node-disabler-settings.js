@@ -1,7 +1,7 @@
 import { app } from "../../scripts/app.js";
 import { api } from "../../scripts/api.js";
 console.log("-------------------------- Node Disabler --------------------------");
-app.extensionManager.setting.set('TestSetting', 'Hello, universe!')
+// app.extensionManager.setting.set('TestSetting', 'Hello, universe!')
 // try {
 // 	const test = await app.extensionManager.setting.set("example.boolean", true,);
 // 	console.log(test);
@@ -37,7 +37,7 @@ if (response.ok) {
 				jsonData[mo].forEach(nodeName => {
 					app.ui.settings.addSetting({
 						id: `node-disabler.${mo}.${nodeName}`,
-						category: ['node-disabler', mo, nodeName],
+						category: ['Node Disabler', mo, nodeName],
 						name: nodeName,
 						type: 'boolean',
 						defaultValue: true,

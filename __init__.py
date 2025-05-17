@@ -50,8 +50,11 @@ def disable_nodes():
     
     for setting in settings:
         if setting.startswith("node-disabler"):
-            if settings[setting] == "false":
+            print(setting)
+            print(settings[setting])
+            if settings[setting] == False:
                 nodeName = setting.split(".")[2]
+                # print(f"Disabling {nodeName}")
                 nodes.NODE_CLASS_MAPPINGS.pop(nodeName)
                 print(f"Removed {nodeName} from NODE_CLASS_MAPPINGS")
     
