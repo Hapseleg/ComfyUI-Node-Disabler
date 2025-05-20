@@ -16,12 +16,19 @@ def create_node_class_mappings():
     counter = 0
     for x in reversed_dict:
         module = getattr(reversed_dict[x], "RELATIVE_PYTHON_MODULE", "nodes")
-        if module == "nodes":
-            module = "Comfy Core"
+        # print(f"Module: {module}")
+        # if module == "nodes" or module == "comfy_api_nodes" or module == "comfy_extras":
         if module.startswith("custom_nodes."):
             module = module.replace("custom_nodes.", "")
-        if module.startswith("comfy_api_nodes.") or module.startswith("comfy_extras."):
-            continue
+        elif module.startswith("comfy_api_nodes."):
+            module = "Comfy API"
+        elif module.startswith("comfy_extras."):
+            module = "Comfy Extras"
+        elif module == "nodes":
+            module = "Comfy Core"
+
+        # if module.startswith("comfy_api_nodes.") or module.startswith("comfy_extras."):
+        #     continue
         
         if module in all_nodes:
             all_nodes[module].append(x)
